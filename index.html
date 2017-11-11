@@ -5,6 +5,7 @@
     <title>Tables Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
         crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 
 <body>
@@ -39,26 +40,7 @@
         </div>
 
 
-        <script type="text/javascript">
-            $("#search-btn").on("click", function () {
-                var searchedCharacter = $("#character-search").val().trim();
-                searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
-                $.get("/api/" + searchedCharacter, function (data) {
-                    console.log(data);
-                    if (data) {
-                        $("#stats").show();
-                        $("#name").text(data.name);
-                        $("#role").text(data.role);
-                        $("#age").text(data.age);
-                        $("#force-points").text(data.forcePoints);
-                    } else {
-                        $("#name").text(
-                            "The force is not strong with this one. Your character was not found.");
-                        $("#stats").hide();
-                    }
-                });
-            });
-        </script>
+
     </div>
 </body>
 
