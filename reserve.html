@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 	<title>Hot Restaurant | Make A Reservation</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	
+	<script src="https://code.jquery.com/jquery.js"></script>
 
 </head>
 <body>
@@ -69,5 +69,39 @@
 	      </div>
 	    </footer>
   </div>
+  <script type="text/javascript">
+  var resv = [];
+    $("#submit-btn").on("click", function () {
+        // var searchedCharacter = $("#character-search").val().trim();
+        // searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
+          event.preventDefault();
+          var newReservation = {
+            name: $("#name").val().trim(),
+            phone: $("#phone").val().trim(),
+            email: $("#email").val().trim(),
+            routeName: $("#unique-id").val().trim()
+          };
+          console.log(newReservation);
+          $("#name").val("");
+          $("#email").val("");
+          $("#phone").val("");
+          $("#unique-id").val("");
+
+        
+
+          
+
+          resv.push(newReservation);
+
+          console.log(resv);
+    
+          // Question: What does this code do??
+          $.post("/api/new", newReservation)
+          .done(function(data) {
+            console.log(data);
+            alert("Adding character...");
+          });
+        });
+</script>
 </body>
 </html>

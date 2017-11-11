@@ -86,9 +86,9 @@ app.get("/api/all", function(req, res) {
   res.json(reservations);
 });
 
-app.get("/api/waitlist", function(req, res) {
-  res.json(waitlist);
-});
+// app.get("/api/waitlist", function(req, res) {
+//   res.json(waitlist);
+// });
 
 
 // Search for Specific Character (or all characters) - provides JSON
@@ -112,14 +112,22 @@ app.get("/api/:reservations?", function(req, res) {
 app.post("/api/new", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body-parser middleware
-  var newcharacter = req.body;
-  newcharacter.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
+  var newReservation = req.body;
+  // newReservation.routeName = newReservation.name.replace(/\s+/g, "").toLowerCase();
 
-  console.log(newcharacter);
+  console.log(reservations.length);
 
-  characters.push(newcharacter);
-
-  res.json(newcharacter);
+  if(reservations.length < 5) {
+    reservations.push(newReservation);
+    
+      res.json(newReservation);
+  } else {
+    waitlist.push(newReservation);
+    
+      res.json(newReservation);
+  }
+  
+ 
 });
 
 // Starts the server to begin listening
