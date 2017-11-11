@@ -3,40 +3,74 @@
 
 <head>
     <title>Tables Page</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
 </head>
 
 <body>
     <div class="container">
         <div class="jumbotron">
-            <h1 class="text-center"><span class="glyphicon glyphicon-fire"></span>Hot Restaurant</h1>
+            <h1 class="text-center">
+                <span class="glyphicon glyphicon-fire"></span>Hot Restaurant</h1>
             <hr>
             <h2 class="text-center">We only have 5 tables! Book your seat befoe they all are gone!</h2>
 
             <br>
 
             <div class="container">
-                <div class="row">
-                    <div class="col col-sm-6 align-right">
-                         <a href="/tables"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span> View Tables</button></a>
-                    </div>
-                    <div class="col col-sm-6">
-                        <a href="/reserve"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-calendar"></span> Make Reservation</button></a>
-                    </div>
-                </div>
-            </div>
+            
+                <div class="row">
+                
+                    <div class="col col-sm-6 align-right">
+                    
+                        <a href="/table">
+                            <button type="button" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-eye-open"></span> View Tables</button>
+                        </a>
+                        </div>
+                
+                    <div class="col col-sm-6">
+                    
+                        <a href="/reserve">
+                            <button type="button" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-calendar"></span> Make Reservation</button>
+                        </a>
+                        </div>
+                    </div>
+                </div>
         </div>
 
 
-   
+
         <div class="container">
-            <p><a href="/api/tables">API Table Link</a>
-            |
-            <a href="/api/waitlist">API Wait List</a></p>
+            <p>
+                <a href="/api/all">API Table Link</a>
+                |
+                <a href="/api/waitlist">API Wait List</a>
+            </p>
         </div>
-        
 
 
+        <script type="text/javascript">
+            $("#search-btn").on("click", function () {
+                var searchedCharacter = $("#character-search").val().trim();
+                searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
+                $.get("/api/" + searchedCharacter, function (data) {
+                    console.log(data);
+                    if (data) {
+                        $("#stats").show();
+                        $("#name").text(data.name);
+                        $("#role").text(data.role);
+                        $("#age").text(data.age);
+                        $("#force-points").text(data.forcePoints);
+                    } else {
+                        $("#name").text(
+                            "The force is not strong with this one. Your character was not found.");
+                        $("#stats").hide();
+                    }
+                });
+            });
+        </script>
     </div>
 </body>
 
