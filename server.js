@@ -41,6 +41,30 @@ var reservations = [
   }
 ];
 
+var waitlist = [
+  {
+    routeName: "wait",
+    name: "Yoda",
+    role: "Jedi Master",
+    age: 900,
+    forcePoints: 2000
+  },
+  {
+    routeName: "list",
+    name: "Darth Maul",
+    role: "Sith Lord",
+    age: 200,
+    forcePoints: 1200
+  },
+  {
+    routeName: "waitList",
+    name: "Obi Wan Kenobi",
+    role: "Jedi Master",
+    age: 55,
+    forcePoints: 1350
+  }
+];
+
 // Routes
 // =============================================================
 
@@ -58,9 +82,14 @@ app.get("/table", function(req, res) {
   });
 
 // Get all characters
-app.get("/all", function(req, res) {
+app.get("/api/all", function(req, res) {
   res.json(reservations);
 });
+
+app.get("/api/waitlist", function(req, res) {
+  res.json(waitlist);
+});
+
 
 // Search for Specific Character (or all characters) - provides JSON
 app.get("/api/:reservations?", function(req, res) {
